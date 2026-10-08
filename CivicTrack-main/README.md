@@ -47,7 +47,7 @@
 git clone https://github.com/Navjot-21/CivicTrack.git
 cd civictrack
 ```
-Then navigate to: [https://github.com/Navjot-21/CivicTrack.git]
+Then navigate to: [https://github.com/SWAMI29/CivicTrack.git]
 
 ---
 
@@ -114,7 +114,7 @@ Then navigate to: [https://github.com/Navjot-21/CivicTrack.git]
 
 ## 📬 Contact
 - **Email**: mayankkumarlinghe@gmail.com
-- **GitHub**: [https://github.com/Navjot-21/CivicTrack.git]
+- **GitHub**: [https://github.com/SWAMI29/CivicTrack.git]
 
 > CivicTrack: Empowering Communities Through Civic Innovation
 
