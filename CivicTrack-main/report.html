@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicTrack - Report Issue</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/report.css">
+</head>
+<body class="light-mode">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <i class="fas fa-city"></i> CivicTrack
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="report.html"><i class="fas fa-plus-circle"></i> Report Issue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="community.html"><i class="fas fa-users"></i> Community</a></li>
+                    
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user"></i> <span id="currentUser">User</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user-edit"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="DataExporter.exportUserData()"><i class="fas fa-download"></i> Download My Data</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light ms-2" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                <!-- Success Message -->
+                <div class="alert alert-success d-none" id="successMessage">
+                    <h5><i class="fas fa-check-circle"></i> Success!</h5>
+                    <p>Your issue has been reported successfully. Thank you for helping improve your community!</p>
+                    <p><strong>Report ID:</strong> <span id="reportId">#001</span></p>
+                    <p><strong>Estimated Response Time:</strong> <span id="responseTime">2-3 business days</span></p>
+                    <div class="mt-3">
+                        <a href="home.html" class="btn btn-success me-2">
+                            <i class="fas fa-arrow-left"></i> Return to Dashboard
+                        </a>
+                        <button class="btn btn-outline-primary" onclick="downloadReport()">
+                            <i class="fas fa-download"></i> Download Report Copy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div class="alert alert-danger d-none" id="errorMessage">
+                    <h5><i class="fas fa-exclamation-triangle"></i> Please Fix the Following Errors:</h5>
+                    <ul id="errorList"></ul>
+                </div>
+
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0"><i class="fas fa-plus-circle"></i> Report a Community Issue</h2>
+                        <p class="mb-0 mt-2 opacity-75">Help us make your neighborhood better by reporting issues you encounter.</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <form id="reportForm">
+                            <!-- Progress Indicator -->
+                            <div class="form-progress mb-4">
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar" id="formProgress" style="width: 0%"></div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <small class="text-muted">Basic Info</small>
+                                    <small class="text-muted">Location</small>
+                                    <small class="text-muted">Details</small>
+                                    <small class="text-muted">Review</small>
+                                </div>
+                            </div>
+
+                            <!-- Step 1: Basic Information -->
+                            <div class="form-step" id="step1">
+                                <div class="section-header">
+                                    <h4><i class="fas fa-info-circle"></i> Basic Information</h4>
+                                    <hr>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <label for="title" class="form-label">Issue Title <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="title" name="title" 
+                                               placeholder="Brief, descriptive title of the issue" required
+                                               oninput="updateFormProgress()">
+                                        <div class="form-text">Be specific and concise (e.g., "Large pothole on Main Street")</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="category" name="category" required onchange="updateFormProgress()">
+                                            <option value="">Select a category...</option>
+                                            <option value="Roads & Transportation">Roads & Transportation</option>
+                                            <option value="Street Lighting">Street Lighting</option>
+                                            <option value="Water & Drainage">Water & Drainage</option>
+                                            <option value="Cleanliness & Waste">Cleanliness & Waste</option>
+                                            <option value="Parks & Recreation">Parks & Recreation</option>
+                                            <option value="Public Safety">Public Safety</option>
+                                            <option value="Utilities">Utilities</option>
+                                            <option value="Noise Pollution">Noise Pollution</option>
+                                            <option value="Animal Control">Animal Control</option>
+                                            <option value="Graffiti & Vandalism">Graffiti & Vandalism</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="urgency" class="form-label">Urgency Level</label>
+                                        <select class="form-select" id="urgency" name="urgency" onchange="updateFormProgress()">
+                                            <option value="Low">Low - Minor inconvenience</option>
+                                            <option value="Medium" selected>Medium - Moderate issue</option>
+                                            <option value="High">High - Safety concern</option>
+                                            <option value="Critical">Critical - Immediate danger</option>
+                                        </select>
+                                        <div class="form-text">This helps prioritize the issue</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Detailed Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="4"
+                                              placeholder="Provide detailed information..." oninput="updateFormProgress()"></textarea>
+                                    <div class="form-text">Tip: Include measurements, specific locations, and any relevant details</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstObserved" class="form-label">First Observed</label>
+                                        <input type="date" class="form-control" id="firstObserved" name="firstObserved">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="recurring" class="form-label">Is this a recurring issue?</label>
+                                        <select class="form-select" id="recurring" name="recurring">
+                                            <option value="No">No, first time</option>
+                                            <option value="Yes">Yes, happens regularly</option>
+                                            <option value="Unsure">Not sure</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                                        Next <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 2: Location Details -->
+                            <div class="form-step d-none" id="step2">
+                                <div class="section-header">
+                                    <h4><i class="fas fa-map-marker-alt"></i> Location Details</h4>
+                                    <hr>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-8 mb-3">
+                                        <label for="location" class="form-label">Specific Location <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="location" name="location" 
+                                               placeholder="Where exactly is this issue located?" required
+                                               oninput="updateFormProgress()">
+                                        <div class="form-text">Be as specific as possible</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">&nbsp;</label>
+                                        <button type="button" class="btn btn-outline-primary w-100" onclick="getCurrentLocationForForm()">
+                                            <i class="fas fa-location-arrow"></i> Use My Location
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="landmark" class="form-label">Nearest Landmark</label>
+                                        <input type="text" class="form-control" id="landmark" name="landmark">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="ward" class="form-label">Ward/Zone Number</label>
+                                        <input type="text" class="form-control" id="ward" name="ward">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="accessibility" class="form-label">Accessibility</label>
+                                        <select class="form-select" id="accessibility" name="accessibility">
+                                            <option value="Public Area">Public Area</option>
+                                            <option value="Private Property">Private Property</option>
+                                            <option value="Restricted Area">Restricted Area</option>
+                                            <option value="Unknown">Unknown</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="traffic" class="form-label">Traffic Impact</label>
+                                        <select class="form-select" id="traffic" name="traffic">
+                                            <option value="None">No impact</option>
+                                            <option value="Low">Low traffic</option>
+                                            <option value="Medium">Moderate traffic</option>
+                                            <option value="High">Heavy traffic</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="affectedPeople" class="form-label">People Affected</label>
+                                        <select class="form-select" id="affectedPeople" name="affectedPeople">
+                                            <option value="Few">Few individuals</option>
+                                            <option value="Neighborhood">Entire neighborhood</option>
+                                            <option value="Community">Wider community</option>
+                                            <option value="Unknown">Unknown</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" onclick="prevStep(1)">
+                                        <i class="fas fa-arrow-left"></i> Previous
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+                                        Next <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 3: Media & Additional Details -->
+                            <div class="form-step d-none" id="step3">
+                                <div class="section-header">
+                                    <h4><i class="fas fa-camera"></i> Media Documentation</h4>
+                                    <hr>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="image_url" class="form-label">Photo URL</label>
+                                        <input type="url" class="form-control" id="image_url" name="image_url" 
+                                               placeholder="Paste a link to an image">
+                                        <div class="form-text">Link to an existing image online</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="file_upload" class="form-label">Upload Photos</label>
+                                        <input type="file" class="form-control" id="file_upload" accept="image/*" multiple>
+                                        <div class="form-text">Upload up to 5 photos</div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3" id="imagePreviewContainer" style="display: none;">
+                                    <div class="d-flex flex-wrap gap-2" id="imagePreviews"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="video_url" class="form-label">Video Evidence</label>
+                                    <input type="url" class="form-control" id="video_url" name="video_url">
+                                </div>
+
+                                <div class="section-header mt-4">
+                                    <h4><i class="fas fa-clipboard-check"></i> Additional Information</h4>
+                                    <hr>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="weather" class="form-label">Weather Conditions</label>
+                                        <select class="form-select" id="weather" name="weather">
+                                            <option value="">Select weather...</option>
+                                            <option value="Clear">Clear</option>
+                                            <option value="Rainy">Rainy</option>
+                                            <option value="Snowy">Snowy</option>
+                                            <option value="Foggy">Foggy</option>
+                                            <option value="Windy">Windy</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="timeOfDay" class="form-label">Time of Day</label>
+                                        <select class="form-select" id="timeOfDay" name="timeOfDay">
+                                            <option value="">Select time...</option>
+                                            <option value="Morning">Morning (6AM-12PM)</option>
+                                            <option value="Afternoon">Afternoon (12PM-6PM)</option>
+                                            <option value="Evening">Evening (6PM-12AM)</option>
+                                            <option value="Night">Night (12AM-6AM)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="suggestions" class="form-label">Suggested Solution</label>
+                                    <textarea class="form-control" id="suggestions" name="suggestions" rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="safetyHazard" name="safetyHazard">
+                                        <label class="form-check-label text-danger fw-bold" for="safetyHazard">
+                                            This issue poses an immediate safety hazard
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
+                                        <i class="fas fa-arrow-left"></i> Previous
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+                                        Next <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 4: Review & Submit -->
+                            <div class="form-step d-none" id="step4">
+                                <div class="section-header">
+                                    <h4><i class="fas fa-clipboard-list"></i> Review Your Report</h4>
+                                    <hr>
+                                </div>
+                                
+                                <div class="review-section">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Basic Information</h6>
+                                            <p><strong>Title:</strong> <span id="reviewTitle"></span></p>
+                                            <p><strong>Category:</strong> <span id="reviewCategory"></span></p>
+                                            <p><strong>Urgency:</strong> <span id="reviewUrgency"></span></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Location Details</h6>
+                                            <p><strong>Location:</strong> <span id="reviewLocation"></span></p>
+                                            <p><strong>Landmark:</strong> <span id="reviewLandmark"></span></p>
+                                            <p><strong>Ward:</strong> <span id="reviewWard"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>Description</h6>
+                                        <p id="reviewDescription"></p>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>Additional Details</h6>
+                                        <p><strong>First Observed:</strong> <span id="reviewFirstObserved"></span></p>
+                                        <p><strong>Recurring Issue:</strong> <span id="reviewRecurring"></span></p>
+                                        <p><strong>Safety Hazard:</strong> <span id="reviewSafetyHazard"></span></p>
+                                    </div>
+                                </div>
+
+                                <div class="section-header mt-4">
+                                    <h4><i class="fas fa-user"></i> Contact Preferences</h4>
+                                    <hr>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="anonymous" name="anonymous">
+                                        <label class="form-check-label" for="anonymous">Submit this report anonymously</label>
+                                    </div>
+                                </div>
+                                
+                                <div id="contactInfo">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="contact_name" class="form-label">Your Name</label>
+                                            <input type="text" class="form-control" id="contact_name" name="contact_name">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="contact_email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="contact_email" name="contact_email">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="contact_phone" class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="contact_phone" name="contact_phone">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Notification Preferences</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="notifyEmail" name="notifyEmail" checked>
+                                            <label class="form-check-label" for="notifyEmail">Email notifications</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="notifySMS" name="notifySMS">
+                                            <label class="form-check-label" for="notifySMS">SMS notifications</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-check mb-4">
+                                    <input class="form-check-input" type="checkbox" id="terms" required>
+                                    <label class="form-check-label" for="terms">
+                                        I confirm that the information provided is accurate
+                                    </label>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
+                                        <i class="fas fa-arrow-left"></i> Previous
+                                    </button>
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                        <i class="fas fa-paper-plane"></i> Submit Issue Report
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Guidelines & Emergency -->
+                <div class="card mt-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="fas fa-info-circle"></i> Reporting Guidelines</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="mb-0">
+                            <li>Fields marked with * are required</li>
+                            <li>Be as specific as possible</li>
+                            <li>Photos help prioritize issues</li>
+                            <li>For emergencies, call 911</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="alert alert-danger mt-4">
+                    <h5><i class="fas fa-exclamation-triangle"></i> Emergency Notice</h5>
+                    <p class="mb-0"><strong>Call 911</strong> for immediate danger</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/global.js"></script>
+
+    <!-- Critical: Define currentUser BEFORE report.js -->
+    <script>
+        const currentUser = JSON.parse(localStorage.getItem("civictrack_current_user") || "null");
+        if (!currentUser) {
+            alert("Please log in to report an issue.");
+            setTimeout(() => window.location.href = "index.html", 100);
+        }
+
+        // Pre-fill contact info
+        document.addEventListener("DOMContentLoaded", () => {
+            if (currentUser) {
+                const set = (id, val) => {
+                    const el = document.getElementById(id);
+                    if (el) el.value = val || '';
+                };
+                set("contact_name", `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim());
+                set("contact_email", currentUser.email);
+                set("contact_phone", currentUser.phone);
+                document.getElementById("currentUser").textContent = currentUser.username || currentUser.email;
+            }
+            document.getElementById("firstObserved").value = new Date().toISOString().split("T")[0];
+        });
+    </script>
+    <script>
+    // **FIX: Consistent localStorage key**
+    const currentUser = JSON.parse(localStorage.getItem("civictrack_user") || "null");
+    if (!currentUser) {
+        alert("Please log in to report an issue.");
+        setTimeout(() => window.location.href = "index.html", 100);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (currentUser) {
+            const set = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.value = val || '';
+            };
+            set("contact_name", `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim());
+            set("contact_email", currentUser.email);
+            set("contact_phone", currentUser.phone);
+            document.getElementById("currentUser").textContent = `${currentUser.firstName} ${currentUser.lastName}`.trim() || currentUser.email;
+        }
+        document.getElementById("firstObserved").value = new Date().toISOString().split("T")[0];
+    });
+</script>
+
+    <script src="js/report.js"></script>
+</body>
+</html>

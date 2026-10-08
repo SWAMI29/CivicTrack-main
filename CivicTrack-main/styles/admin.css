@@ -1,0 +1,183 @@
+/* Admin Dashboard Specific Styles */
+.stats-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stats-icon {
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover .stats-icon {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* Admin Table Enhancements */
+#issuesTable {
+    background: var(--bg-card);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+#issuesTable thead th {
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--dark-color), #374151);
+    color: white;
+    padding: 1rem 0.75rem;
+}
+
+#issuesTable tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#issuesTable tbody tr:hover {
+    background: rgba(37, 99, 235, 0.05);
+    transform: scale(1.01);
+}
+
+#issuesTable tbody td {
+    padding: 1rem 0.75rem;
+    vertical-align: middle;
+    border: none;
+}
+
+.issue-title {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Bulk Actions */
+#bulkForm .input-group {
+    background: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+#bulkSubmit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Admin Search */
+#adminSearchInput {
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+/* Action Buttons */
+.btn-group-sm .btn {
+    padding: 0.375rem 0.5rem;
+    border-radius: 0.375rem;
+}
+
+.btn-group-sm .btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Status Badges */
+.badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+}
+
+/* Modal Enhancements */
+#statusModal .modal-content {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+#statusModal .modal-header {
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+    color: white;
+}
+
+#statusModal .modal-footer {
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+    
+    #issuesTable {
+        font-size: 0.875rem;
+    }
+    
+    .btn-group-sm .btn {
+        padding: 0.25rem 0.375rem;
+        font-size: 0.75rem;
+    }
+    
+    #bulkForm .input-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    #bulkForm .form-select,
+    #bulkForm .btn {
+        width: 100%;
+        border-radius: 0.5rem;
+    }
+}
+
+/* Dark Mode Adjustments */
+.dark-mode #issuesTable {
+    background: var(--bg-card);
+}
+
+.dark-mode #issuesTable tbody tr:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+/* Loading States */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Export Button */
+.btn-export {
+    background: linear-gradient(135deg, var(--secondary-color), #10b981);
+    border: none;
+    color: white;
+}
+
+.btn-export:hover {
+    background: linear-gradient(135deg, #10b981, var(--secondary-color));
+    transform: translateY(-1px);
+}

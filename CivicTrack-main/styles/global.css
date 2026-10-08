@@ -1,0 +1,105 @@
+/* global.css – ENHANCED, DARK MODE READY */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #059669;
+    --accent-color: #dc2626;
+    --warning-color: #d97706;
+    --info-color: #0891b2;
+    --light-color: #f8fafc;
+    --dark-color: #1e293b;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --shadow-3d: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.light-mode {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-card: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1rem;
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+    color: white;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form-control, .form-select {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
+    background: var(--bg-card);
+}
+
+.notification-toast {
+    border: none;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+}
+
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hover-scale {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-scale:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .container { padding: 0 15px; }
+}

@@ -1,0 +1,659 @@
+/* Report Form Specific Styles - ENHANCED VERSION */
+.form-progress {
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.form-progress .progress {
+    height: 12px;
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-progress .progress-bar {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 10px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-progress .progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+    position: relative;
+}
+
+.progress-labels small {
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.progress-labels small.active {
+    color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-step {
+    animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.form-step h4 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.form-step h4 i {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.5rem;
+}
+
+.review-section {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.review-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.review-section h6 {
+    color: var(--primary-color);
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.review-section h6 i {
+    opacity: 0.8;
+}
+
+.review-section p {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.review-section p:last-child {
+    border-bottom: none;
+}
+
+.review-section strong {
+    color: var(--text-primary);
+    min-width: 140px;
+    display: inline-block;
+    font-weight: 700;
+}
+
+/* Image Previews - Enhanced */
+.image-preview-item {
+    position: relative;
+    display: inline-block;
+    margin: 0.5rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-preview-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.image-preview-item img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+}
+
+.image-preview-item .remove-image {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    background: var(--accent-color);
+    border: 2px solid var(--bg-primary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.image-preview-item .remove-image:hover {
+    transform: scale(1.1);
+    background: #dc2626;
+}
+
+/* Form Sections - Enhanced */
+.section-header {
+    margin: 2.5rem 0 1.75rem;
+    position: relative;
+}
+
+.section-header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.5rem;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.section-header h4 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-header hr {
+    border: none;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), transparent 70%);
+    margin: 0.75rem 0;
+    border-radius: 2px;
+    opacity: 0.6;
+}
+
+/* Enhanced Form Controls */
+.form-label {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.form-label i {
+    color: var(--primary-color);
+    width: 20px;
+}
+
+.form-control, .form-select {
+    border: 2px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-primary);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.15);
+    transform: translateY(-2px);
+    background: var(--bg-primary);
+}
+
+.form-text {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-text i {
+    color: var(--info-color);
+}
+
+/* Step Navigation - Enhanced */
+.btn-step {
+    padding: 0.875rem 2.25rem;
+    font-weight: 700;
+    border-radius: 0.875rem;
+    border: 2px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-step:hover::before {
+    left: 100%;
+}
+
+.btn-step:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8, var(--primary-color));
+}
+
+/* Success Message Enhancements */
+#successMessage {
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(5, 150, 105, 0.05), transparent);
+    animation: bounceIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#successMessage h5 {
+    color: var(--secondary-color);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Emergency Notice - Enhanced */
+.alert-danger {
+    border-left: 4px solid var(--accent-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), transparent);
+    animation: pulse 2s infinite;
+}
+
+.alert-danger h5 {
+    color: var(--accent-color);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Custom file upload - Enhanced */
+.custom-file-upload {
+    border: 2px dashed var(--border-color);
+    border-radius: 1rem;
+    padding: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-file-upload::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.custom-file-upload:hover::before {
+    left: 100%;
+}
+
+.custom-file-upload:hover {
+    border-color: var(--primary-color);
+    background: var(--bg-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.custom-file-upload i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover i {
+    transform: scale(1.1);
+    color: var(--secondary-color);
+}
+
+/* Required field indicators */
+.form-label.required::after {
+    content: '*';
+    color: var(--accent-color);
+    margin-left: 0.25rem;
+}
+
+/* Checkbox and radio enhancements */
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-label {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Responsive Design - Enhanced */
+@media (max-width: 768px) {
+    .form-progress .progress {
+        height: 10px;
+    }
+    
+    .progress-labels {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .progress-labels small {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+    }
+    
+    .review-section {
+        padding: 1.25rem;
+    }
+    
+    .review-section strong {
+        min-width: 100px;
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .review-section p {
+        font-size: 0.9rem;
+    }
+    
+    .btn-step {
+        padding: 0.75rem 1.5rem;
+        width: 100%;
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .section-header h4 {
+        font-size: 1.3rem;
+    }
+    
+    .image-preview-item img {
+        width: 100px;
+        height: 80px;
+    }
+    
+    .custom-file-upload {
+        padding: 2rem 1rem;
+    }
+    
+    .custom-file-upload i {
+        font-size: 2rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Dark mode adjustments */
+.dark-mode .review-section {
+    background: var(--bg-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .custom-file-upload {
+    background: var(--bg-primary);
+    border-color: var(--border-color);
+}
+
+.dark-mode .form-control,
+.dark-mode .form-select {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.dark-mode .form-control:focus,
+.dark-mode .form-select:focus {
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+}
+
+.dark-mode .progress-labels small.active {
+    background: rgba(37, 99, 235, 0.2);
+}
+
+/* Loading states */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+/* Success state animations */
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+}
+
+.success-checkmark .check-icon {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    border-radius: 50%;
+    box-sizing: content-box;
+    border: 4px solid var(--secondary-color);
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.success-checkmark .check-icon::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: -2px;
+    width: 30px;
+    height: 60px;
+    border-top: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-right: 4px solid var(--secondary-color);
+    border-bottom: 4px solid var(--secondary-color);
+    transform: rotate(45deg);
+    animation: check 0.8s ease-in-out 0.5s forwards;
+    opacity: 0;
+}
+
+@keyframes check {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fill {
+    to {
+        box-shadow: inset 0 0 0 40px var(--secondary-color);
+    }
+}
+
+@keyframes scale {
+    0%, 100% {
+        transform: none;
+    }
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+.fade-in { animation: fadeIn 0.3s ease-in; }
+.fade-out { animation: fadeOut 0.2s ease-out; }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeOut { from { opacity:1; } to { opacity:0; } }
+/* --------------------------------------------------------------
+   CivicTrack Animations and Transitions (for smooth UX)
+-------------------------------------------------------------- */
+
+/* Fade-in effect when switching steps */
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Fade-out effect when switching steps */
+.fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+/* Animations keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Smooth fade for success message */
+#successMessage {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+#successMessage.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progress bar animation */
+#formProgress {
+  transition: width 0.3s ease;
+}
